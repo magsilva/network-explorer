@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.ironiacorp.network.UnsignedByte;
+import com.ironiacorp.datastructure.UnsignedByte;
 
 /**
  * Convenience class for storing MacAddresses and getting byte arrays and String representations

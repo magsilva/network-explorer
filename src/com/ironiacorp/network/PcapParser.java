@@ -1,62 +1,55 @@
+/*
+Copyright (c) 2010 Paul Royal <paulroyal@gmail.com>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+*/
+
+/**
+ * The sjpcap is a Java-only library (that do not rely on native pcap library)
+ * that parses libpcap-created packet capture files to create simplified,
+ * java-based object representations of IPv4-based IP, UDP and TCP packets.
+ *  
+ * See more at http://code.google.com/p/sjpcap/
+ */
 package com.ironiacorp.network;
 
 import java.io.*;
-import java.net.*;
+import java.util.NoSuchElementException;
 
-import com.ironiacorp.network.protocol.ip.IPPacket;
-import com.ironiacorp.network.protocol.tcp.TCPPacket;
-import com.ironiacorp.network.protocol.udp.UDPPacket;
-
-import edu.gatech.sjpcap.packet.Packet;
+import com.ironiacorp.io.StreamUtil;
+import com.ironiacorp.network.protocol.Packet;
 
 public class PcapParser
 {
-
-	public static final long pcapMagicNumber = 0xA1B2C3D4;
-	public static final int globalHeaderSize = 24;
-	public static final int pcapPacketHeaderSize = 16;
-	public static final int capLenOffset = 8;
-
-	public static final int etherHeaderLength = 14;
-	public static final int etherTypeOffset = 12;
-	public static final int etherTypeIP = 0x800;
-
-	public static final int verIHLOffset = 14;
-	public static final int ipProtoOffset = 23;
-	public static final int ipSrcOffset = 26;
-	public static final int ipDstOffset = 30;
-
-	public static final int ipProtoTCP = 6;
-	public static final int ipProtoUDP = 17;
-
-	public static final int udpHeaderLength = 8;
-
-	private FileInputStream fis;
-
-	private long convertInt(byte[] data)
-	{
-		return ((data[3] & 0xFF) << 24) | ((data[2] & 0xFF) << 16) | ((data[1] & 0xFF) << 8)
-				| (data[0] & 0xFF);
-	}
-
-	private long convertInt(byte[] data, int offset)
-	{
-		byte[] target = new byte[4];
-		System.arraycopy(data, offset, target, 0, target.length);
-		return convertInt(target);
-	}
-
-	private int convertShort(byte[] data)
-	{
-		return ((data[0] & 0xFF) << 8) | (data[1] & 0xFF);
-	}
-
-	private int convertShort(byte[] data, int offset)
-	{
-		byte[] target = new byte[2];
-		System.arraycopy(data, offset, target, 0, target.length);
-		return this.convertShort(target);
-	}
+	public static final long PCAP_MAGIC_NUMBER = 0xA1B2C3D4;
+	
+	public static final int GLOBAL_HEADER_SIZE = 24;
+	
+	public static final int PCAP_PACKET_HEADER_SIZE = 16;
+	
+	public static final int PCAP_PACKET_LENGTH_SIZE = 8;
+	
+	private InputStream is;
 
 	private int readBytes(byte[] data)
 	{
@@ -64,179 +57,66 @@ public class PcapParser
 		int read = -1;
 		while (offset != data.length) {
 			try {
-				read = this.fis.read(data, offset, data.length - offset);
+				read = is.read(data, offset, data.length - offset);
 			} catch (Exception e) {
+				read = -1;
+			}
+			if (read == -1) {
 				break;
 			}
-			if (read == -1)
-				break;
-
 			offset = offset + read;
 		}
-		if (read != data.length)
-			return -1;
-		else
-			return 0;
+
+		return offset;
 	}
 
-	private int readGlobalHeader()
+	private void readGlobalHeader()
 	{
-		byte[] globalHeader = new byte[PcapParser.globalHeaderSize];
-
-		if (readBytes(globalHeader) == -1)
-			return -1;
-		if (convertInt(globalHeader) != PcapParser.pcapMagicNumber)
-			return -2;
-
-		return 0;
-	}
-
-	private boolean isIPPacket(byte[] packet)
-	{
-		int etherType = this.convertShort(packet, etherTypeOffset);
-		return etherType == PcapParser.etherTypeIP;
-	}
-
-	private boolean isUDPPacket(byte[] packet)
-	{
-		if (!isIPPacket(packet))
-			return false;
-		return packet[ipProtoOffset] == ipProtoUDP;
-	}
-
-	private boolean isTCPPacket(byte[] packet)
-	{
-		if (!isIPPacket(packet))
-			return false;
-		return packet[ipProtoOffset] == ipProtoTCP;
-	}
-
-	private int getIPHeaderLength(byte[] packet)
-	{
-		return (packet[verIHLOffset] & 0xF) * 4;
-	}
-
-	private int getTCPHeaderLength(byte[] packet)
-	{
-		final int inTCPHeaderDataOffset = 12;
-
-		int dataOffset = PcapParser.etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inTCPHeaderDataOffset;
-		return ((packet[dataOffset] >> 4) & 0xF) * 4;
-	}
-
-	private IPPacket buildIPPacket(byte[] packet)
-	{
-		IPPacket ipPacket = new IPPacket();
-
-		byte[] srcIP = new byte[4];
-		System.arraycopy(packet, PcapParser.ipSrcOffset, srcIP, 0, srcIP.length);
-		try {
-			ipPacket.src_ip = InetAddress.getByAddress(srcIP);
-		} catch (Exception e) {
-			return null;
+		byte[] globalHeader = new byte[GLOBAL_HEADER_SIZE];
+		if (readBytes(globalHeader) == -1 || StreamUtil.convertInt(globalHeader) != PCAP_MAGIC_NUMBER) {
+			throw new IllegalArgumentException("Invalid stream (it is not a PCAP dump file)");
 		}
+	}
 
-		byte[] dstIP = new byte[4];
-		System.arraycopy(packet, PcapParser.ipDstOffset, dstIP, 0, dstIP.length);
+
+	public void openFile(String path)
+	{
+		FileInputStream fis = null;
+		
 		try {
-			ipPacket.dst_ip = InetAddress.getByAddress(dstIP);
+			fis = new FileInputStream(new File(path));
+			setInputStream(fis);
 		} catch (Exception e) {
-			return null;
+			if (fis != null) {
+				try {
+					fis.close();
+				} catch (IOException ioe) {}
+			}
+			throw new IllegalArgumentException("Invalid file", e);
 		}
-
-		return ipPacket;
-	}
-
-	private UDPPacket buildUDPPacket(byte[] packet)
-	{
-		final int inUDPHeaderSrcPortOffset = 0;
-		final int inUDPHeaderDstPortOffset = 2;
-
-		UDPPacket udpPacket = new UDPPacket(this.buildIPPacket(packet));
-
-		int srcPortOffset = PcapParser.etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inUDPHeaderSrcPortOffset;
-		udpPacket.src_port = this.convertShort(packet, srcPortOffset);
-
-		int dstPortOffset = PcapParser.etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inUDPHeaderDstPortOffset;
-		udpPacket.dst_port = this.convertShort(packet, dstPortOffset);
-
-		int payloadDataStart = PcapParser.etherHeaderLength + this.getIPHeaderLength(packet)
-				+ PcapParser.udpHeaderLength;
-		byte[] data = new byte[packet.length - payloadDataStart];
-		System.arraycopy(packet, payloadDataStart, data, 0, data.length);
-		udpPacket.data = data;
-
-		return udpPacket;
-	}
-
-	private TCPPacket buildTCPPacket(byte[] packet)
-	{
-		final int inTCPHeaderSrcPortOffset = 0;
-		final int inTCPHeaderDstPortOffset = 2;
-
-		TCPPacket tcpPacket = new TCPPacket(this.buildIPPacket(packet));
-
-		int srcPortOffset = PcapParser.etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inTCPHeaderSrcPortOffset;
-		tcpPacket.src_port = this.convertShort(packet, srcPortOffset);
-
-		int dstPortOffset = PcapParser.etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inTCPHeaderDstPortOffset;
-		tcpPacket.dst_port = this.convertShort(packet, dstPortOffset);
-
-		int payloadDataStart = PcapParser.etherHeaderLength + this.getIPHeaderLength(packet)
-				+ this.getTCPHeaderLength(packet);
-		byte[] data = new byte[packet.length - payloadDataStart];
-		System.arraycopy(packet, payloadDataStart, data, 0, data.length);
-		tcpPacket.data = data;
-
-		return tcpPacket;
-	}
-
-	public int openFile(String path)
-	{
-		try {
-			this.fis = new FileInputStream(new File(path));
-		} catch (Exception e) {
-			return -1;
-		}
-
-		if (readGlobalHeader() < 0)
-			return -1;
-		else
-			return 0;
 	}
 	
-	public Packet getPacket()
+	public void setInputStream(InputStream is)
 	{
-		byte[] pcapPacketHeader = new byte[PcapParser.pcapPacketHeaderSize];
-		if (this.readBytes(pcapPacketHeader) < 0)
-			return Packet.EOF;
-		long packetSize = convertInt(pcapPacketHeader, PcapParser.capLenOffset);
-
-		byte[] packet = new byte[(int) packetSize];
-		if (this.readBytes(packet) < 0)
-			return Packet.EOF;
-
-		if (this.isUDPPacket(packet))
-			return this.buildUDPPacket(packet);
-		else if (this.isTCPPacket(packet))
-			return this.buildTCPPacket(packet);
-		else if (this.isIPPacket(packet))
-			return this.buildIPPacket(packet);
-		else
-			return new Packet();
+		this.is = is;
+		readGlobalHeader();
 	}
-
-	public void closeFile()
+	
+	public Packet getNext()
 	{
-		try {
-			fis.close();
-		} catch (Exception e) {
-			// do nothing
+		byte[] pcapPacketHeader = new byte[PcapParser.PCAP_PACKET_HEADER_SIZE];
+		if (readBytes(pcapPacketHeader) == 0) {
+			throw new NoSuchElementException();
 		}
+		
+		long packetSize = StreamUtil.convertInt(pcapPacketHeader, PcapParser.PCAP_PACKET_LENGTH_SIZE);
+		byte[] packet = new byte[(int) packetSize];
+		if (readBytes(packet) == 0) {
+			return null;
+		}
+
+		// TODO: Implement chaining here to detect packet type.
+		
+		return null;
 	}
 }

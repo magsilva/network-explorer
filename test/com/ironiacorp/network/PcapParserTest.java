@@ -6,11 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ironiacorp.network.PcapParser;
+import com.ironiacorp.network.protocol.Packet;
 import com.ironiacorp.network.protocol.ip.IPPacket;
 import com.ironiacorp.network.protocol.tcp.TCPPacket;
 import com.ironiacorp.network.protocol.udp.UDPPacket;
-
-import edu.gatech.sjpcap.packet.Packet;
 
 public class PcapParserTest
 {
@@ -28,7 +27,7 @@ public class PcapParserTest
 	{
 		Packet packet = null;
 
-		while ((packet = parser.getPacket()) != Packet.EOF) {
+		while ((packet = parser.getNext()) != null) {
 			assertNotNull(packet);
 			if (packet instanceof TCPPacket) {
 				TCPPacket tcp = (TCPPacket) packet;

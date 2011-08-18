@@ -1,4 +1,4 @@
-package com.ironiacorp.network;
+package com.ironiacorp.network.protocol;
 
 public enum NetworkProtocol
 {

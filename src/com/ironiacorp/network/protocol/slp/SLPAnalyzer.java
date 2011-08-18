@@ -16,8 +16,8 @@ limitations under the License.
 
 package com.ironiacorp.network.protocol.slp;
 
-import com.ironiacorp.network.PacketAnalyzer;
 import com.ironiacorp.network.protocol.slp.SLPMessage.Function;
+import com.ironiacorp.network.tool.PacketAnalyzer;
 
 /**
  * SLPAnalyzer analyzes packets that contains SLP (Service Locator

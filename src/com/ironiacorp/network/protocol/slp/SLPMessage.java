@@ -22,9 +22,9 @@ import java.util.Locale;
 
 import com.ironiacorp.datastructure.array.ArrayUtil;
 import com.ironiacorp.io.StreamUtil;
-import com.ironiacorp.network.NetworkProtocol;
-import com.ironiacorp.network.TransportProtocol;
+import com.ironiacorp.network.protocol.NetworkProtocol;
 import com.ironiacorp.network.protocol.Packet;
+import com.ironiacorp.network.protocol.TransportProtocol;
 
 /**
  * SLP message. This class should not be directly used: its subclass

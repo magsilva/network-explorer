@@ -1,47 +1,33 @@
-package com.ironiacorp.network;
+/*
+Copyright (C) 2011 Marco Aurélio Graciotto Silva <magsilva@ironiacorp.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+
+package com.ironiacorp.network.tool.nf;
 
 import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.collect.Multimap;
+import com.ironiacorp.datastructure.Tuple;
 import com.ironiacorp.network.protocol.ethernet.MacAddress;
 
 public class NetworkFreud
 {
-	public void getMac()
-	{
-		try {
-
-			InetAddress address = InetAddress.getLocalHost();
-			System.out.println("Address " + address);
-			/*
-			 * Get NetworkInterface for the current host and then read the hardware address.
-			 */
-			NetworkInterface ni = NetworkInterface.getByInetAddress(address);
-			System.out.println("NI = " + ni);
-			byte[] mac = ni.getHardwareAddress();
-
-			/*
-			 * Extract each array of mac address and convert it to hexa with the following format
-			 * 08-00-27-DC-4A-9E.
-			 */
-
-			System.out.println("MAC Address is ");
-			for (int i = 0; i < mac.length; i++) {
-				System.out.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : "");
-			}
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (SocketException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static void main(String[] args)
 	{
 		ArpDatabase database = new ArpDatabase();
@@ -64,6 +50,5 @@ public class NetworkFreud
 				System.out.println("\t" + mac.toString());
 			}
 		}
-
 	}
 }

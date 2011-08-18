@@ -1,4 +1,4 @@
-package com.ironiacorp.network;
+package com.ironiacorp.network.tool.listener;
 
 public interface NetworkListener
 {
