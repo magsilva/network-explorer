@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package com.ironiacorp.network.analyzer.slp;
+package com.ironiacorp.network.protocol.slp;
 
 import java.net.InetAddress;
 import java.nio.charset.Charset;
@@ -24,7 +24,7 @@ import com.ironiacorp.datastructure.array.ArrayUtil;
 import com.ironiacorp.io.StreamUtil;
 import com.ironiacorp.network.NetworkProtocol;
 import com.ironiacorp.network.TransportProtocol;
-import com.ironiacorp.network.analyzer.Packet;
+import com.ironiacorp.network.protocol.Packet;
 
 /**
  * SLP message. This class should not be directly used: its subclass

@@ -6,8 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 
-import com.ironiacorp.network.analyzer.slp.SLPAnalyzer;
-import com.ironiacorp.network.analyzer.slp.SLPMessage;
+import com.ironiacorp.network.protocol.slp.SLPAnalyzer;
+import com.ironiacorp.network.protocol.slp.SLPMessage;
 
 
 // http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4212324

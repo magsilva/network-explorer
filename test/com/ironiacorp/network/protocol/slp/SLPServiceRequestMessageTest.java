@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package com.ironiacorp.network.analyzer.slp;
+package com.ironiacorp.network.protocol.slp;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ironiacorp.io.IoUtil;
+import com.ironiacorp.network.protocol.slp.SLPServiceRequestMessage;
 
 public class SLPServiceRequestMessageTest
 {

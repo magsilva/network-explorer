@@ -1,4 +1,4 @@
-package com.ironiacorp.network.analyzer.slp;
+package com.ironiacorp.network.protocol.slp;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ironiacorp.io.IoUtil;
+import com.ironiacorp.network.protocol.slp.SLPServiceReplyMessage;
 
-public class SLPMessageTest
+public class SLPServiceReplyMessageTest
 {
 
 	@Before
@@ -19,8 +20,8 @@ public class SLPMessageTest
 	@Test
 	public void testProcessPacket() throws Exception
 	{
-		byte[] data = IoUtil.dumpFile("/media/magsilva/Downloads-August/BroadcastListener/test-resources/packets/slp/SLP-UnknownMessage3-CmapServer-5.04.03.dump");
-		SLPMessage msg = new SLPMessage();
+		byte[] data = IoUtil.dumpFile("/home/magsilva/slp-packet");
+		SLPServiceReplyMessage msg = new SLPServiceReplyMessage();
 		msg.processPacket(data);
 		assertEquals(Locale.ENGLISH, msg.getLocale());
 	}

@@ -1,0 +1,165 @@
+23:50:25.637200 EAPOL key (3) v1, len 95
+23:50:25.651261 EAPOL key (3) v1, len 117
+23:50:25.656233 EAPOL key (3) v1, len 175
+23:50:25.656371 EAPOL key (3) v1, len 95
+23:50:26.852785 IP (tos 0x0, ttl 46, id 11460, offset 0, flags [none], proto TCP (6), length 441)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [P.], cksum 0x9691 (correct), seq 173414823:173415212, ack 3544117530, win 1002, options [nop,nop,TS val 2416242748 ecr 17282636], length 389
+23:50:26.852865 IP (tos 0x0, ttl 64, id 53317, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.57581 > yw-in-f125.1e100.net.xmpp-client: Flags [.], cksum 0x6f1f (correct), seq 1, ack 389, win 523, options [nop,nop,TS val 17328400 ecr 2416242748], length 0
+23:50:26.853435 IP (tos 0x0, ttl 64, id 53318, offset 0, flags [DF], proto TCP (6), length 185)
+    192.168.1.103.57581 > yw-in-f125.1e100.net.xmpp-client: Flags [P.], cksum 0x4adf (correct), seq 1:134, ack 389, win 523, options [nop,nop,TS val 17328401 ecr 2416242748], length 133
+23:50:26.853928 IP (tos 0x0, ttl 64, id 26897, offset 0, flags [DF], proto UDP (17), length 72)
+    192.168.1.103.35440 > resolver1.opendns.com.domain: [udp sum ok] 3194+ PTR? 103.1.168.192.in-addr.arpa. (44)
+23:50:27.000385 IP (tos 0x0, ttl 64, id 725, offset 0, flags [DF], proto TCP (6), length 157)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0xd9fc (correct), seq 374422135:374422240, ack 3645736357, win 105, options [nop,nop,TS val 17328548 ecr 6769717], length 105
+23:50:27.055972 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 72)
+    resolver1.opendns.com.domain > 192.168.1.103.35440: [udp sum ok] 3194 NXDomain q: PTR? 103.1.168.192.in-addr.arpa. 0/0/0 (44)
+23:50:27.056308 IP (tos 0x0, ttl 64, id 27099, offset 0, flags [DF], proto UDP (17), length 72)
+    192.168.1.103.33455 > resolver1.opendns.com.domain: [udp sum ok] 3721+ PTR? 125.47.125.74.in-addr.arpa. (44)
+23:50:27.094865 IP (tos 0x0, ttl 46, id 11461, offset 0, flags [none], proto TCP (6), length 233)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [P.], cksum 0xd0e9 (correct), seq 389:570, ack 1, win 1002, options [nop,nop,TS val 2416242995 ecr 17328400], length 181
+23:50:27.099475 IP (tos 0x0, ttl 46, id 11462, offset 0, flags [none], proto TCP (6), length 441)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [P.], cksum 0x0c16 (correct), seq 570:959, ack 1, win 1002, options [nop,nop,TS val 2416242995 ecr 17328400], length 389
+23:50:27.099528 IP (tos 0x0, ttl 64, id 53319, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.57581 > yw-in-f125.1e100.net.xmpp-client: Flags [.], cksum 0x6a72 (correct), seq 134, ack 959, win 523, options [nop,nop,TS val 17328647 ecr 2416242995], length 0
+23:50:27.155701 IP (tos 0x0, ttl 46, id 11463, offset 0, flags [none], proto TCP (6), length 52)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [.], cksum 0x694c (correct), seq 959, ack 134, win 1002, options [nop,nop,TS val 2416243056 ecr 17328401], length 0
+23:50:27.223525 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 106)
+    resolver1.opendns.com.domain > 192.168.1.103.33455: [udp sum ok] 3721 q: PTR? 125.47.125.74.in-addr.arpa. 1/0/0 125.47.125.74.in-addr.arpa. PTR yw-in-f125.1e100.net. (78)
+23:50:27.223954 IP (tos 0x0, ttl 64, id 27267, offset 0, flags [DF], proto UDP (17), length 73)
+    192.168.1.103.35873 > resolver1.opendns.com.domain: [udp sum ok] 63300+ PTR? 222.222.67.208.in-addr.arpa. (45)
+23:50:27.358832 IP (tos 0x0, ttl 46, id 11464, offset 0, flags [none], proto TCP (6), length 1470)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [.], cksum 0x1c8d (correct), seq 959:2377, ack 134, win 1002, options [nop,nop,TS val 2416243255 ecr 17328647], length 1418
+23:50:27.365596 IP (tos 0x0, ttl 46, id 11465, offset 0, flags [none], proto TCP (6), length 1470)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [.], cksum 0xdf2a (correct), seq 2377:3795, ack 134, win 1002, options [nop,nop,TS val 2416243255 ecr 17328647], length 1418
+23:50:27.365633 IP (tos 0x0, ttl 64, id 53320, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.57581 > yw-in-f125.1e100.net.xmpp-client: Flags [.], cksum 0x5d50 (correct), seq 134, ack 3795, win 523, options [nop,nop,TS val 17328913 ecr 2416243255], length 0
+23:50:27.368829 IP (tos 0x0, ttl 46, id 11466, offset 0, flags [none], proto TCP (6), length 1470)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [.], cksum 0x1994 (correct), seq 3795:5213, ack 134, win 1002, options [nop,nop,TS val 2416243255 ecr 17328647], length 1418
+23:50:27.401963 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 108)
+    resolver1.opendns.com.domain > 192.168.1.103.35873: [udp sum ok] 63300 q: PTR? 222.222.67.208.in-addr.arpa. 1/0/0 222.222.67.208.in-addr.arpa. PTR resolver1.opendns.com. (80)
+23:50:27.402302 IP (tos 0x0, ttl 64, id 27445, offset 0, flags [DF], proto UDP (17), length 70)
+    192.168.1.103.57925 > resolver1.opendns.com.domain: [udp sum ok] 48710+ PTR? 195.61.4.64.in-addr.arpa. (42)
+23:50:27.408588 IP (tos 0x0, ttl 64, id 53321, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.57581 > yw-in-f125.1e100.net.xmpp-client: Flags [.], cksum 0x579b (correct), seq 134, ack 5213, win 523, options [nop,nop,TS val 17328956 ecr 2416243255], length 0
+23:50:27.438643 IP (tos 0x0, ttl 116, id 1337, offset 0, flags [DF], proto TCP (6), length 52)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [.], cksum 0xe988 (correct), seq 1093, ack 105, win 65026, options [nop,nop,TS val 6769969 ecr 17328548], length 0
+23:50:27.438703 IP (tos 0x0, ttl 64, id 726, offset 0, flags [DF], proto TCP (6), length 332)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0x49de (correct), seq 105:385, ack 1, win 105, options [nop,nop,TS val 17328986 ecr 6769717], length 280
+23:50:27.587830 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 129)
+    resolver1.opendns.com.domain > 192.168.1.103.57925: [udp sum ok] 48710 q: PTR? 195.61.4.64.in-addr.arpa. 1/0/0 195.61.4.64.in-addr.arpa. PTR baymsg1020303.gateway.edge.messenger.live.com. (101)
+23:50:27.623805 IP (tos 0x0, ttl 46, id 11467, offset 0, flags [none], proto TCP (6), length 324)
+    yw-in-f125.1e100.net.xmpp-client > 192.168.1.103.57581: Flags [P.], cksum 0x986d (correct), seq 5213:5485, ack 134, win 1002, options [nop,nop,TS val 2416243521 ecr 17328913], length 272
+23:50:27.623846 IP (tos 0x0, ttl 64, id 53322, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.57581 > yw-in-f125.1e100.net.xmpp-client: Flags [.], cksum 0x54aa (correct), seq 134, ack 5485, win 523, options [nop,nop,TS val 17329171 ecr 2416243521], length 0
+23:50:27.726107 IP (tos 0x0, ttl 116, id 5627, offset 0, flags [DF], proto TCP (6), length 59)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [P.], cksum 0x1b51 (correct), seq 1093:1100, ack 385, win 64746, options [nop,nop,TS val 6769971 ecr 17328986], length 7
+23:50:27.726157 IP (tos 0x0, ttl 64, id 727, offset 0, flags [DF], proto TCP (6), length 64)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [.], cksum 0xebe8 (correct), seq 385, ack 1, win 105, options [nop,nop,TS val 17329273 ecr 6769717,nop,nop,sack 1 {1093:1100}], length 0
+23:50:29.666404 IP (tos 0x0, ttl 75, id 60259, offset 0, flags [DF], proto TCP (6), length 179)
+    jabber-01-01-snc2.facebook.com.xmpp-client > 192.168.1.103.60948: Flags [P.], cksum 0x7d6c (correct), seq 915421548:915421675, ack 3546277579, win 22, options [nop,nop,TS val 1636997068 ecr 17279122], length 127
+23:50:29.666491 IP (tos 0x0, ttl 64, id 6841, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.60948 > jabber-01-01-snc2.facebook.com.xmpp-client: Flags [.], cksum 0x1c79 (correct), seq 1, ack 127, win 501, options [nop,nop,TS val 17331214 ecr 1636997068], length 0
+23:50:29.666677 IP (tos 0x0, ttl 64, id 29710, offset 0, flags [DF], proto UDP (17), length 72)
+    192.168.1.103.53929 > resolver1.opendns.com.domain: [udp sum ok] 28580+ PTR? 105.181.63.69.in-addr.arpa. (44)
+23:50:29.864425 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 116)
+    resolver1.opendns.com.domain > 192.168.1.103.53929: [udp sum ok] 28580 q: PTR? 105.181.63.69.in-addr.arpa. 1/0/0 105.181.63.69.in-addr.arpa. PTR jabber-01-01-snc2.facebook.com. (88)
+23:50:31.059402 IP (tos 0x0, ttl 50, id 839, offset 0, flags [none], proto TCP (6), length 104)
+    yw-in-f17.1e100.net.https > 192.168.1.103.58045: Flags [P.], cksum 0xc740 (correct), seq 2604525520:2604525572, ack 318234297, win 372, options [nop,nop,TS val 1211536078 ecr 17304636], length 52
+23:50:31.059476 IP (tos 0x0, ttl 64, id 61045, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.58045 > yw-in-f17.1e100.net.https: Flags [.], cksum 0x8b6b (correct), seq 1, ack 52, win 188, options [nop,nop,TS val 17332607 ecr 1211536078], length 0
+23:50:31.059662 IP (tos 0x0, ttl 64, id 31103, offset 0, flags [DF], proto UDP (17), length 71)
+    192.168.1.103.53533 > resolver1.opendns.com.domain: [udp sum ok] 9998+ PTR? 17.47.125.74.in-addr.arpa. (43)
+23:50:31.379089 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 104)
+    resolver1.opendns.com.domain > 192.168.1.103.53533: [udp sum ok] 9998 q: PTR? 17.47.125.74.in-addr.arpa. 1/0/0 17.47.125.74.in-addr.arpa. PTR yw-in-f17.1e100.net. (76)
+23:50:31.845162 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.103 tell 192.168.1.1, length 28
+23:50:31.845195 ARP, Ethernet (len 6), IPv4 (len 4), Reply 192.168.1.103 is-at 00:08:54:af:f4:0a (oui Unknown), length 28
+23:50:31.845303 IP (tos 0x0, ttl 64, id 31888, offset 0, flags [DF], proto UDP (17), length 70)
+    192.168.1.103.60336 > resolver1.opendns.com.domain: [udp sum ok] 43096+ PTR? 1.1.168.192.in-addr.arpa. (42)
+23:50:31.845441 IP (tos 0x0, ttl 64, id 31889, offset 0, flags [DF], proto UDP (17), length 72)
+    192.168.1.103.47019 > resolver1.opendns.com.domain: [udp sum ok] 29445+ PTR? 103.1.168.192.in-addr.arpa. (44)
+23:50:32.032957 IP (tos 0x0, ttl 116, id 6328, offset 0, flags [DF], proto TCP (6), length 1151)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [P.], cksum 0xd74f (correct), seq 1:1100, ack 385, win 64746, options [nop,nop,TS val 6770014 ecr 17329273], length 1099
+23:50:32.033010 IP (tos 0x0, ttl 64, id 728, offset 0, flags [DF], proto TCP (6), length 64)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [.], cksum 0xd590 (correct), seq 385, ack 1100, win 122, options [nop,nop,TS val 17333580 ecr 6770014,nop,nop,sack 1 {1093:1100}], length 0
+23:50:32.098774 IP (tos 0x0, ttl 64, id 729, offset 0, flags [DF], proto TCP (6), length 157)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0xbc0c (correct), seq 385:490, ack 1100, win 122, options [nop,nop,TS val 17333646 ecr 6770014], length 105
+23:50:32.175283 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 72)
+    resolver1.opendns.com.domain > 192.168.1.103.47019: [udp sum ok] 29445 NXDomain q: PTR? 103.1.168.192.in-addr.arpa. 0/0/0 (44)
+23:50:32.175449 IP (tos 0x0, ttl 64, id 32219, offset 0, flags [DF], proto UDP (17), length 118)
+    192.168.1.103.50397 > resolver1.opendns.com.domain: [udp sum ok] 43553+ PTR? a.0.4.f.f.a.e.f.f.f.4.5.8.0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+23:50:32.181117 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 70)
+    resolver1.opendns.com.domain > 192.168.1.103.60336: [udp sum ok] 43096 NXDomain q: PTR? 1.1.168.192.in-addr.arpa. 0/0/0 (42)
+23:50:32.358172 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 118)
+    resolver1.opendns.com.domain > 192.168.1.103.50397: [udp sum ok] 43553 NXDomain q: PTR? a.0.4.f.f.a.e.f.f.f.4.5.8.0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. 0/0/0 (90)
+23:50:32.358412 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 199)
+    192.168.1.103.ipp > 192.168.1.255.ipp: [udp sum ok] UDP, length 171
+23:50:32.358516 IP (tos 0x0, ttl 64, id 32402, offset 0, flags [DF], proto UDP (17), length 72)
+    192.168.1.103.59078 > resolver1.opendns.com.domain: [udp sum ok] 53683+ PTR? 255.1.168.192.in-addr.arpa. (44)
+23:50:32.539039 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 72)
+    resolver1.opendns.com.domain > 192.168.1.103.59078: [udp sum ok] 53683 NXDomain q: PTR? 255.1.168.192.in-addr.arpa. 0/0/0 (44)
+23:50:32.575826 IP (tos 0x0, ttl 116, id 14642, offset 0, flags [DF], proto TCP (6), length 52)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [.], cksum 0xd564 (correct), seq 1100, ack 490, win 64641, options [nop,nop,TS val 6770020 ecr 17333646], length 0
+23:50:33.145221 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+23:50:33.145330 IP (tos 0x0, ttl 64, id 33189, offset 0, flags [DF], proto UDP (17), length 72)
+    192.168.1.103.56801 > resolver1.opendns.com.domain: [udp sum ok] 30518+ PTR? 110.1.168.192.in-addr.arpa. (44)
+23:50:33.349028 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 72)
+    resolver1.opendns.com.domain > 192.168.1.103.56801: [udp sum ok] 30518 NXDomain q: PTR? 110.1.168.192.in-addr.arpa. 0/0/0 (44)
+23:50:33.539371 IP (tos 0x0, ttl 64, id 730, offset 0, flags [DF], proto TCP (6), length 244)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0x6f4f (correct), seq 490:682, ack 1100, win 122, options [nop,nop,TS val 17335087 ecr 6770020], length 192
+23:50:33.804340 IP (tos 0x0, ttl 116, id 64, offset 0, flags [DF], proto TCP (6), length 59)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [P.], cksum 0x0038 (correct), seq 1100:1107, ack 682, win 64449, options [nop,nop,TS val 6770032 ecr 17335087], length 7
+23:50:33.804398 IP (tos 0x0, ttl 64, id 731, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [.], cksum 0xc9ef (correct), seq 682, ack 1107, win 122, options [nop,nop,TS val 17335352 ecr 6770032], length 0
+23:50:34.145344 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+23:50:34.946850 IP (tos 0x0, ttl 64, id 732, offset 0, flags [DF], proto TCP (6), length 158)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0x151b (correct), seq 682:788, ack 1107, win 122, options [nop,nop,TS val 17336494 ecr 6770032], length 106
+23:50:35.531774 IP (tos 0x0, ttl 116, id 26053, offset 0, flags [DF], proto TCP (6), length 52)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [.], cksum 0xca20 (correct), seq 1107, ack 788, win 64343, options [nop,nop,TS val 6770049 ecr 17336494], length 0
+23:50:35.955314 IP (tos 0x0, ttl 64, id 733, offset 0, flags [DF], proto TCP (6), length 225)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0x23f3 (correct), seq 788:961, ack 1107, win 122, options [nop,nop,TS val 17337502 ecr 6770049], length 173
+23:50:36.338428 IP (tos 0x0, ttl 116, id 5619, offset 0, flags [DF], proto TCP (6), length 60)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [P.], cksum 0xfb79 (correct), seq 1107:1115, ack 961, win 64170, options [nop,nop,TS val 6770057 ecr 17337502], length 8
+23:50:36.338493 IP (tos 0x0, ttl 64, id 734, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [.], cksum 0xbed1 (correct), seq 961, ack 1115, win 122, options [nop,nop,TS val 17337886 ecr 6770057], length 0
+23:50:39.634822 IP (tos 0x0, ttl 64, id 735, offset 0, flags [DF], proto TCP (6), length 158)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0x0191 (correct), seq 961:1067, ack 1115, win 122, options [nop,nop,TS val 17341182 ecr 6770057], length 106
+23:50:39.885257 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+23:50:40.020170 IP (tos 0x0, ttl 116, id 31283, offset 0, flags [DF], proto TCP (6), length 52)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [.], cksum 0xb1dc (correct), seq 1115, ack 1067, win 65535, options [nop,nop,TS val 6770094 ecr 17341182], length 0
+23:50:40.885165 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+23:50:41.885144 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+23:50:44.002516 IP (tos 0x0, ttl 64, id 736, offset 0, flags [DF], proto TCP (6), length 158)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0xeff0 (correct), seq 1067:1173, ack 1115, win 122, options [nop,nop,TS val 17345550 ecr 6770094], length 106
+23:50:44.394136 IP (tos 0x0, ttl 116, id 4901, offset 0, flags [DF], proto TCP (6), length 52)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [.], cksum 0xa0a0 (correct), seq 1115, ack 1173, win 65429, options [nop,nop,TS val 6770138 ecr 17345550], length 0
+23:50:46.263830 IP (tos 0x0, ttl 64, id 11387, offset 0, flags [DF], proto TCP (6), length 57)
+    192.168.1.103.53359 > baymsg1020422.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0x6a9f (correct), seq 1434292712:1434292717, ack 3471034923, win 501, options [nop,nop,TS val 17347811 ecr 6237192], length 5
+23:50:46.264156 IP (tos 0x0, ttl 64, id 46307, offset 0, flags [DF], proto UDP (17), length 69)
+    192.168.1.103.43056 > resolver1.opendns.com.domain: [udp sum ok] 18553+ PTR? 46.44.4.64.in-addr.arpa. (41)
+23:50:46.506697 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto UDP (17), length 128)
+    resolver1.opendns.com.domain > 192.168.1.103.43056: [udp sum ok] 18553 q: PTR? 46.44.4.64.in-addr.arpa. 1/0/0 46.44.4.64.in-addr.arpa. PTR baymsg1020422.gateway.edge.messenger.live.com. (100)
+23:50:46.538123 IP (tos 0x0, ttl 116, id 21789, offset 0, flags [DF], proto TCP (6), length 60)
+    baymsg1020422.gateway.edge.messenger.live.com.msnp > 192.168.1.103.53359: Flags [P.], cksum 0x35a1 (correct), seq 1:9, ack 5, win 64745, options [nop,nop,TS val 6237628 ecr 17347811], length 8
+23:50:46.538195 IP (tos 0x0, ttl 64, id 11388, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.53359 > baymsg1020422.gateway.edge.messenger.live.com.msnp: Flags [.], cksum 0x0935 (correct), seq 5, ack 9, win 501, options [nop,nop,TS val 17348085 ecr 6237628], length 0
+23:50:47.358701 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 215)
+    192.168.1.103.ipp > 192.168.1.255.ipp: [udp sum ok] UDP, length 187
+23:50:48.358676 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 225)
+    192.168.1.103.ipp > 192.168.1.255.ipp: [udp sum ok] UDP, length 197
+23:50:48.835149 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+23:50:49.090043 IP (tos 0x0, ttl 64, id 737, offset 0, flags [DF], proto TCP (6), length 158)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0xdb7a (correct), seq 1173:1279, ack 1115, win 122, options [nop,nop,TS val 17350637 ecr 6770138], length 106
+23:50:49.358590 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto UDP (17), length 160)
+    192.168.1.103.ipp > 192.168.1.255.ipp: [udp sum ok] UDP, length 132
+23:50:49.529142 IP (tos 0x0, ttl 116, id 21648, offset 0, flags [DF], proto TCP (6), length 52)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [.], cksum 0x8c8e (correct), seq 1115, ack 1279, win 65323, options [nop,nop,TS val 6770189 ecr 17350637], length 0
+23:50:49.714913 IP (tos 0x0, ttl 64, id 738, offset 0, flags [DF], proto TCP (6), length 276)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [P.], cksum 0x2bdc (correct), seq 1279:1503, ack 1115, win 122, options [nop,nop,TS val 17351262 ecr 6770189], length 224
+23:50:49.835053 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+23:50:50.021343 IP (tos 0x0, ttl 116, id 29843, offset 0, flags [DF], proto TCP (6), length 60)
+    baymsg1020303.gateway.edge.messenger.live.com.msnp > 192.168.1.103.56166: Flags [P.], cksum 0xbf65 (correct), seq 1115:1123, ack 1503, win 65099, options [nop,nop,TS val 6770194 ecr 17351262], length 8
+23:50:50.021407 IP (tos 0x0, ttl 64, id 739, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.1.103.56166 > baymsg1020303.gateway.edge.messenger.live.com.msnp: Flags [.], cksum 0x86af (correct), seq 1503, ack 1123, win 122, options [nop,nop,TS val 17351569 ecr 6770194], length 0
+23:50:50.835052 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.110 tell 192.168.1.1, length 28
+

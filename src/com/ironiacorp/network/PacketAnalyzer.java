@@ -14,8 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package com.ironiacorp.network.analyzer;
+package com.ironiacorp.network;
 
-public interface Packet
+import com.ironiacorp.network.protocol.Packet;
+
+public interface PacketAnalyzer
 {
+	/**
+	 * Analyze a byte array and create a Packet instance.
+	 * 
+	 * @param packet Payload of the packet.
+	 * 
+	 * @return A packet instance or NULL if it could not be parsed.
+	 */
+	Packet parse(byte[] packet);
 }

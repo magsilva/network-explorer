@@ -1,4 +1,4 @@
-package com.ironiacorp.network.analyzer.slp;
+package com.ironiacorp.network.protocol.slp;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;

@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package com.ironiacorp.network.analyzer.slp;
+package com.ironiacorp.network.protocol.slp;
 
-import com.ironiacorp.network.analyzer.PacketAnalyzer;
-import com.ironiacorp.network.analyzer.slp.SLPMessage.Function;
+import com.ironiacorp.network.PacketAnalyzer;
+import com.ironiacorp.network.protocol.slp.SLPMessage.Function;
 
 /**
  * SLPAnalyzer analyzes packets that contains SLP (Service Locator

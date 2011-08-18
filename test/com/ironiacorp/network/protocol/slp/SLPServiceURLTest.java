@@ -1,9 +1,12 @@
-package com.ironiacorp.network.analyzer.slp;
+package com.ironiacorp.network.protocol.slp;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.ironiacorp.network.protocol.slp.SLPServiceType;
+import com.ironiacorp.network.protocol.slp.SLPServiceURL;
 
 public class SLPServiceURLTest
 {
