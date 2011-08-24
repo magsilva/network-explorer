@@ -18,4 +18,9 @@ package com.ironiacorp.network.protocol;
 
 public interface Packet
 {
+	int getHeaderSize();
+	
+	int getTrailerSize();
+	
+	int getLength();
 }

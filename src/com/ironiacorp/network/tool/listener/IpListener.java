@@ -65,7 +65,4 @@ public abstract class IpListener implements NetworkListener
 			throw new IllegalArgumentException("Invalid IP address", e);
 		}
 	}
-
-	
-	public abstract void listen();
 }

@@ -372,7 +372,7 @@ public class SLPMessage implements Packet
 	 * @param data Raw bytes of the message
 	 * @throws IllegalArgumentException in case of any parsing errors.
 	 */
-	public void processPacket(byte[] packet)
+	public void parse(byte[] packet)
 	{
 		processVersion(packet);
 		processFunction(packet);
@@ -382,5 +382,17 @@ public class SLPMessage implements Packet
 		processExtensionOffset(packet);
 		processTransactionId(packet);
 		processLocale(packet);
+	}
+
+	@Override
+	public int getHeaderSize()
+	{
+		return LANGUAGE_OFFSET + LANGUAGE_SIZE;
+	}
+
+	@Override
+	public int getTrailerSize()
+	{
+		return 0;
 	}
 }

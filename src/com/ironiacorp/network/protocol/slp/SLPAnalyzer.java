@@ -16,8 +16,10 @@ limitations under the License.
 
 package com.ironiacorp.network.protocol.slp;
 
+import com.ironiacorp.network.protocol.Packet;
+import com.ironiacorp.network.protocol.PacketAnalyzer;
+import com.ironiacorp.network.protocol.RawPacket;
 import com.ironiacorp.network.protocol.slp.SLPMessage.Function;
-import com.ironiacorp.network.tool.PacketAnalyzer;
 
 /**
  * SLPAnalyzer analyzes packets that contains SLP (Service Locator
@@ -59,20 +61,26 @@ public class SLPAnalyzer implements PacketAnalyzer
 				switch (function) {
 					case SRVRQST:
 						msg = new SLPServiceRequestMessage();
-						msg.processPacket(packet);
+						msg.parse(packet);
 						return msg;
 					default:
 						msg = new SLPMessage();
-						msg.processPacket(packet);
+						msg.parse(packet);
 						return msg;
 				}
 			} else {
 				msg = new SLPMessage();
-				msg.processPacket(packet);
+				msg.parse(packet);
 				return msg;
 			}
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	@Override
+	public Packet parse(RawPacket packet)
+	{
+		return null;
 	}
 }

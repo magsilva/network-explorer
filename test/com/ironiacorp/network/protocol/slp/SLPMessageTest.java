@@ -22,7 +22,7 @@ public class SLPMessageTest
 	{
 		byte[] data = IoUtil.dumpFile("/media/magsilva/Downloads-August/BroadcastListener/test-resources/packets/slp/SLP-UnknownMessage3-CmapServer-5.04.03.dump");
 		SLPMessage msg = new SLPMessage();
-		msg.processPacket(data);
+		msg.parse(data);
 		assertEquals(Locale.ENGLISH, msg.getLocale());
 	}
 }

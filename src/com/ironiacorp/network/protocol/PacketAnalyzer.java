@@ -14,11 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package com.ironiacorp.network.tool;
+package com.ironiacorp.network.protocol;
 
-import com.ironiacorp.network.protocol.Packet;
 
-public interface PacketAnalyzer
+public interface PacketAnalyzer<T extends Packet>
 {
 	/**
 	 * Analyze a byte array and create a Packet instance.
@@ -27,5 +26,7 @@ public interface PacketAnalyzer
 	 * 
 	 * @return A packet instance or NULL if it could not be parsed.
 	 */
-	Packet parse(byte[] packet);
+	T parse(byte[] packet);
+	
+	T parse(RawPacket packet);
 }

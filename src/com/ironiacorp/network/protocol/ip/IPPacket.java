@@ -18,15 +18,30 @@ package com.ironiacorp.network.protocol.ip;
 
 import java.net.InetAddress;
 
+import com.ironiacorp.io.StreamUtil;
 import com.ironiacorp.network.protocol.Packet;
+import com.ironiacorp.network.protocol.ethernet.EthernetPacket;
 
 
 public class IPPacket implements Packet
 {
+	public static final int ipProtoTCP = 6;
+
+	public static final int ipProtoOffset = 23;
+	public static final int ipSrcOffset = 26;
+	public static final int ipDstOffset = 30;
+	public static final int verIHLOffset = 0;
+
+	
     private InetAddress source;
     
     private InetAddress destination;
 
+	private int getIPHeaderLength(byte[] packet)
+	{
+		return (packet[verIHLOffset] & 0xF) * 4;
+	}  
+    
 	public InetAddress getSource()
 	{
 		return source;
@@ -45,5 +60,46 @@ public class IPPacket implements Packet
 	public void setDestination(InetAddress destination)
 	{
 		this.destination = destination;
+	}
+	
+	private IPPacket buildIPPacket(byte[] packet)
+	{
+		IPPacket ipPacket = new IPPacket();
+
+		byte[] srcIP = new byte[4];
+		System.arraycopy(packet, ipSrcOffset, srcIP, 0, srcIP.length);
+		try {
+			ipPacket.setSource(InetAddress.getByAddress(srcIP));
+		} catch (Exception e) {
+			return null;
+		}
+
+		byte[] dstIP = new byte[4];
+		System.arraycopy(packet, ipDstOffset, dstIP, 0, dstIP.length);
+		try {
+			ipPacket.setDestination(InetAddress.getByAddress(dstIP));
+		} catch (Exception e) {
+			return null;
+		}
+
+		return ipPacket;
+	}
+
+	@Override
+	public int getHeaderSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTrailerSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLength() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

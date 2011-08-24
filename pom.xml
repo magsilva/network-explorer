@@ -106,24 +106,34 @@
 		<dependency>
 			<groupId>ironiacorp</groupId>
 			<artifactId>commons-errorhandler</artifactId>
-			<version>[2.0.0,)</version>
+			<version>[3.0.0,)</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>ironiacorp</groupId>
 			<artifactId>commons-datastructures</artifactId>
-			<version>[1.6.7,)</version>
+			<version>[3.0.0,)</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>ironiacorp</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>[2.2.0,)</version>
+			<version>[3.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>r09</version>
+		</dependency>
+		<dependency>
+			<groupId>ironiacorp</groupId>
+			<artifactId>commons-patterns</artifactId>
+			<version>[3.0.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>ironiacorp</groupId>
+			<artifactId>commons-ecc</artifactId>
+			<version>[3.0.0,)</version>
 		</dependency>
 	</dependencies>
 

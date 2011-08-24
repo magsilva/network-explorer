@@ -24,7 +24,7 @@ import java.net.SocketException;
 // http://download.oracle.com/javase/tutorial/networking/datagrams/broadcasting.html
 public class MulticastListener extends IpListener
 {
-	public void listen()
+	public void startListening()
 	{
 		byte[] buffer = new byte[bufferSize];
 		try {
@@ -40,5 +40,9 @@ public class MulticastListener extends IpListener
 		} catch (IOException ioe) {
 			throw new IllegalArgumentException("Cannot receive package from port " + port + " at address " + address, ioe);
 		}
+	}
+	
+	public void stopListening()
+	{
 	}
 }

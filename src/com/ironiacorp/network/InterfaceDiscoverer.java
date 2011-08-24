@@ -27,6 +27,10 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+
+/**
+ * Discover network interfaces and their network addresses.
+ */
 public class InterfaceDiscoverer
 {
 	private boolean ipv4 = true;
@@ -40,6 +44,13 @@ public class InterfaceDiscoverer
 		return ipv4;
 	}
 
+	/**
+	 * Configure whether IPv4 addresses should be considered as
+	 * valid.
+	 * 
+	 * @param localhost True if IPv4 addresses are valid, False
+	 * otherwise.
+	 */
 	public void setIpv4(boolean ipv4)
 	{
 		this.ipv4 = ipv4;
@@ -50,7 +61,13 @@ public class InterfaceDiscoverer
 		return ipv6;
 	}
 
-	public void setIpv6(boolean ipv6)
+	/**
+	 * Configure whether IPv6 addresses should be considered as
+	 * valid.
+	 * 
+	 * @param localhost True if IPv6 addresses are valid, False
+	 * otherwise.
+	 */	public void setIpv6(boolean ipv6)
 	{
 		this.ipv6 = ipv6;
 	}
@@ -60,11 +77,25 @@ public class InterfaceDiscoverer
 		return localhost;
 	}
 
+	/**
+	 * Configure whether localhost addresses should be considered as
+	 * valid.
+	 * 
+	 * @param localhost True if localhost addresses are valid, False
+	 * otherwise.
+	 */
 	public void setLocalhost(boolean localhost)
 	{
 		this.localhost = localhost;
 	}
-
+	
+	/**
+	 * Get network addresses provided by a given network interface.
+	 * 
+	 * @param ni Network interface to be analyzed.
+	 * 
+	 * @return Network addresses.
+	 */
 	public Set<InetAddress> getAddresses(NetworkInterface ni)
 	{
 		Enumeration<InetAddress> addresses = ni.getInetAddresses();
@@ -75,6 +106,7 @@ public class InterfaceDiscoverer
 			if (address.isLoopbackAddress() && !localhost) {
 				continue;
 			}
+			
 			if (address instanceof Inet6Address && !ipv6) {
 				continue;
 			}
@@ -89,6 +121,11 @@ public class InterfaceDiscoverer
 		return validAddresses;
 	}
 
+	/**
+	 * Discover interfaces and network addresses.
+	 * 
+	 * @return Map of interfaces and its network addresses.
+	 */
 	public Map<NetworkInterface, Set<InetAddress>> discover()
 	{
 		Map<NetworkInterface, Set<InetAddress>> result = new TreeMap<NetworkInterface, Set<InetAddress>>();

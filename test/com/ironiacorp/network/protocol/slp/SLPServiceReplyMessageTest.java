@@ -22,7 +22,7 @@ public class SLPServiceReplyMessageTest
 	{
 		byte[] data = IoUtil.dumpFile("/home/magsilva/slp-packet");
 		SLPServiceReplyMessage msg = new SLPServiceReplyMessage();
-		msg.processPacket(data);
+		msg.parse(data);
 		assertEquals(Locale.ENGLISH, msg.getLocale());
 	}
 }

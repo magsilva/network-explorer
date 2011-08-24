@@ -1,140 +1,134 @@
+/*
+Copyright (C) 2011 Marco Aurélio Graciotto Silva <magsilva@ironiacorp.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package com.ironiacorp.network.protocol.ethernet;
 
-import java.net.InetAddress;
-
+import com.ironiacorp.ecc.crc32.CRC32_Direct;
 import com.ironiacorp.io.StreamUtil;
 import com.ironiacorp.network.protocol.Packet;
-import com.ironiacorp.network.protocol.ip.IPPacket;
-import com.ironiacorp.network.protocol.tcp.TCPPacket;
-import com.ironiacorp.network.protocol.udp.UDPPacket;
+
 
 public class EthernetPacket implements Packet
 {
-	public static final int etherHeaderLength = 14;
-	public static final int etherTypeOffset = 12;
-	public static final int etherTypeIP = 0x800;
-
-	public static final int verIHLOffset = 14;
-	public static final int ipProtoOffset = 23;
-	public static final int ipSrcOffset = 26;
-	public static final int ipDstOffset = 30;
-
-	public static final int ipProtoTCP = 6;
-	public static final int ipProtoUDP = 17;
-
-	public static final int udpHeaderLength = 8;
+	public static final int PREAMBLE_SIZE = 7;
+	public static final short[] PREAMBLE_DATA = {170, 170, 170, 170, 170, 170, 170};
 	
+	public static final int START_OF_FRAME_DELIMITER_OFFSET = PREAMBLE_SIZE;
+	public static final int START_OF_FRAME_DELIMITER_SIZE = 1;
+	public static final short START_OF_FRAME_DELIMITER_DATA = 171;
+	
+	public static final int MAC_ADDRESS_SIZE = 6;
+	
+	public static final int DESTINATION_ADDRESS_OFFSET = 8;
+	public static final int SOURCE_ADDRESS_OFFSET = DESTINATION_ADDRESS_OFFSET + MAC_ADDRESS_SIZE;
+	
+	public static final int ETHERTYPE_SIZE = 2;
+	public static final int ETHERTYPE_OFFSET = SOURCE_ADDRESS_OFFSET + MAC_ADDRESS_SIZE;
+	//	public static final int ETHERTYPE_OFFSET = TAG_OFFSET + TAG_SIZE;
+	public static final int ETHERTYPE_IPV4 = 0x800;
+	public static final int ETHERTYPE_ARP = 0x806;
+	public static final int ETHERTYPE_802_1Q = 0x8100;
+	public static final int ETHERTYPE_IPV6 = 0x86DD;
+
+	
+	public static final int PAYLOAD_OFFSET = ETHERTYPE_OFFSET + ETHERTYPE_SIZE;
+	public static final int MAX_PAYLOAD_SIZE = 1500;
+	
+	public static final int CRC_SIZE = 4;
+	
+	public static final int INTERFRAME_GAP_SIZE = 12;
+	
+
 	private MacAddress source;
 	
 	private MacAddress destination;
 
+	private byte[] payload;
+
+	@Override
+	public int getHeaderSize()
+	{
+		int size = PREAMBLE_SIZE + START_OF_FRAME_DELIMITER_SIZE + (MAC_ADDRESS_SIZE * 2) + ETHERTYPE_SIZE;
+		return size;
+	}
+
+	@Override
+	public int getTrailerSize() 
+	{
+		return CRC_SIZE;
+	}
+
+	@Override
+	public int getLength()
+	{
+		return getHeaderSize() + payload.length + getTrailerSize();
+	}
 	
-	private boolean isIPPacket(byte[] packet)
+	public MacAddress getSource() {
+		return source;
+	}
+
+	public void setSource(MacAddress source) {
+		this.source = source;
+	}
+
+	public MacAddress getDestination() {
+		return destination;
+	}
+
+	public void setDestination(MacAddress destination) {
+		this.destination = destination;
+	}
+
+	public void parse(byte[] data)
 	{
-		int etherType = StreamUtil.convertShort(packet, etherTypeOffset);
-		if (etherType != etherTypeIP) {
-			return false;
+		byte[] preamble = new byte[7];
+		System.arraycopy(data,  0, preamble, 0, PREAMBLE_SIZE);
+		for (int i = 0; i < PREAMBLE_SIZE; i++) {
+			if (preamble[i] != PREAMBLE_DATA[i]) {
+				throw new IllegalArgumentException("Invalid preamble");
+			}
 		}
-		return true;
-	}
-
-	private boolean isUDPPacket(byte[] packet)
-	{
-		if (!isIPPacket(packet))
-			return false;
-		return packet[ipProtoOffset] == ipProtoUDP;
-	}
-
-	private boolean isTCPPacket(byte[] packet)
-	{
-		if (!isIPPacket(packet))
-			return false;
-		return packet[ipProtoOffset] == ipProtoTCP;
-	}
-
-	private int getIPHeaderLength(byte[] packet)
-	{
-		return (packet[verIHLOffset] & 0xF) * 4;
-	}
-
-	private int getTCPHeaderLength(byte[] packet)
-	{
-		final int inTCPHeaderDataOffset = 12;
-
-		int dataOffset = etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inTCPHeaderDataOffset;
-		return ((packet[dataOffset] >> 4) & 0xF) * 4;
-	}
-
-	private IPPacket buildIPPacket(byte[] packet)
-	{
-		IPPacket ipPacket = new IPPacket();
-
-		byte[] srcIP = new byte[4];
-		System.arraycopy(packet, ipSrcOffset, srcIP, 0, srcIP.length);
-		try {
-			ipPacket.setSource(InetAddress.getByAddress(srcIP));
-		} catch (Exception e) {
-			return null;
+		
+		byte delimiter = data[START_OF_FRAME_DELIMITER_OFFSET];
+		if (delimiter != START_OF_FRAME_DELIMITER_DATA) {
+			throw new IllegalArgumentException("Invaild start of frame delimiter");
 		}
-
-		byte[] dstIP = new byte[4];
-		System.arraycopy(packet, ipDstOffset, dstIP, 0, dstIP.length);
-		try {
-			ipPacket.setDestination(InetAddress.getByAddress(dstIP));
-		} catch (Exception e) {
-			return null;
+		
+		byte[] address = new byte[MAC_ADDRESS_SIZE];
+		System.arraycopy(data, SOURCE_ADDRESS_OFFSET, address, 0, MAC_ADDRESS_SIZE);
+		destination = new MacAddress(address);
+		System.arraycopy(data, SOURCE_ADDRESS_OFFSET, address, 0, MAC_ADDRESS_SIZE);
+		source = new MacAddress(address);
+		
+		int sizeOrType = StreamUtil.readInt(data, ETHERTYPE_OFFSET, ETHERTYPE_SIZE);
+		if (sizeOrType < 1500) {
+			payload = new byte[sizeOrType];
+			System.arraycopy(data, PAYLOAD_OFFSET, payload, 0, payload.length);
 		}
-
-		return ipPacket;
+		
+		CRC32_Direct crc32 = new CRC32_Direct();
+		byte[] crc32original = new byte[CRC_SIZE];
+		byte[] crc32new = crc32.calculate(payload);
+		System.arraycopy(data, PAYLOAD_OFFSET, crc32original, 0, CRC_SIZE);
+		for (int i = 0; i < CRC_SIZE; i++) {
+			if (crc32original[i] != crc32new[i]) {
+				throw new IllegalArgumentException("Invalid CRC32 code");
+			}
+		}
 	}
-
-	private UDPPacket buildUDPPacket(byte[] packet)
-	{
-		final int inUDPHeaderSrcPortOffset = 0;
-		final int inUDPHeaderDstPortOffset = 2;
-
-		UDPPacket udpPacket = new UDPPacket(this.buildIPPacket(packet));
-
-		int srcPortOffset = etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inUDPHeaderSrcPortOffset;
-		udpPacket.src_port = StreamUtil.convertShort(packet, srcPortOffset);
-
-		int dstPortOffset = etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inUDPHeaderDstPortOffset;
-		udpPacket.dst_port = StreamUtil.convertShort(packet, dstPortOffset);
-
-		int payloadDataStart = etherHeaderLength + this.getIPHeaderLength(packet)
-				+ udpHeaderLength;
-		byte[] data = new byte[packet.length - payloadDataStart];
-		System.arraycopy(packet, payloadDataStart, data, 0, data.length);
-		udpPacket.data = data;
-
-		return udpPacket;
-	}
-
-	private TCPPacket buildTCPPacket(byte[] packet)
-	{
-		final int inTCPHeaderSrcPortOffset = 0;
-		final int inTCPHeaderDstPortOffset = 2;
-
-		TCPPacket tcpPacket = new TCPPacket(this.buildIPPacket(packet));
-
-		int srcPortOffset = etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inTCPHeaderSrcPortOffset;
-		tcpPacket.src_port = StreamUtil.convertShort(packet, srcPortOffset);
-
-		int dstPortOffset = etherHeaderLength + this.getIPHeaderLength(packet)
-				+ inTCPHeaderDstPortOffset;
-		tcpPacket.dst_port = StreamUtil.convertShort(packet, dstPortOffset);
-
-		int payloadDataStart = etherHeaderLength + this.getIPHeaderLength(packet)
-				+ this.getTCPHeaderLength(packet);
-		byte[] data = new byte[packet.length - payloadDataStart];
-		System.arraycopy(packet, payloadDataStart, data, 0, data.length);
-		tcpPacket.data = data;
-
-		return tcpPacket;
-	}
-
 }
+

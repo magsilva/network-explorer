@@ -40,7 +40,7 @@ public class SLPServiceRequestMessageTest
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("packets/slp/SLP-ServiceRequestMessage-CmapServer-5.04.03.dump");
 		byte[] data = IoUtil.toByteArray(is);
 		SLPServiceRequestMessage msg = new SLPServiceRequestMessage();
-		msg.processPacket(data);
+		msg.parse(data);
 		assertEquals(Locale.ENGLISH, msg.getLocale());
 	}
 	
@@ -50,7 +50,7 @@ public class SLPServiceRequestMessageTest
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("packets/slp/SLP-ServiceRequestMessage-Indexer-CmapServer-5.04.03.dump");
 		byte[] data = IoUtil.toByteArray(is);
 		SLPServiceRequestMessage msg = new SLPServiceRequestMessage();
-		msg.processPacket(data);
+		msg.parse(data);
 		assertEquals(Locale.ENGLISH, msg.getLocale());
 	}
 
@@ -60,7 +60,7 @@ public class SLPServiceRequestMessageTest
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("packets/slp/SLP-ServiceRequestMessage-wsServerCXL-CmapServer-5.04.03.dump");
 		byte[] data = IoUtil.toByteArray(is);
 		SLPServiceRequestMessage msg = new SLPServiceRequestMessage();
-		msg.processPacket(data);
+		msg.parse(data);
 		assertEquals(Locale.ENGLISH, msg.getLocale());
 	}
 	
@@ -70,7 +70,7 @@ public class SLPServiceRequestMessageTest
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("packets/slp/SLP-ServiceRequestMessage-cmapV3-CmapServer-5.04.03.dump");
 		byte[] data = IoUtil.toByteArray(is);
 		SLPServiceRequestMessage msg = new SLPServiceRequestMessage();
-		msg.processPacket(data);
+		msg.parse(data);
 		assertEquals(Locale.ENGLISH, msg.getLocale());
 	}
 }
