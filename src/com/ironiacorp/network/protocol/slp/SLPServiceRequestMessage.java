@@ -44,6 +44,16 @@ public class SLPServiceRequestMessage extends SLPMessage
 	
 	private List<String> scopes;
 	
+	public List<InetAddress> getAddresses()
+	{
+		return addresses;
+	}
+	
+	public List<SLPServiceType> getServiceTypes()
+	{
+		return serviceTypes;
+	}
+	
 	/**
 	 * Get the bytes of the message body in the following RFC 2608 compliant
 	 * format:

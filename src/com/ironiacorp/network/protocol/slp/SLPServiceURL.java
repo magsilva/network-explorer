@@ -161,7 +161,7 @@ public class SLPServiceURL
 		String url;
 		int length = StreamUtil.readInt(packet, offset + URL_ENTRY_URL_LENGTH_RELATIVE_OFFSET, URL_ENTRY_URL_LENGTH_SIZE);
 		byte[] rawurl = new byte[length];
-		for (int i = 0, j = offset + URL_ENTRY_URL_RELATIVE_OFFSET; i < length; i++, j++) {
+		for (int i = 0, j = offset + URL_ENTRY_URL_RELATIVE_OFFSET; i < length && j < packet.length; i++, j++) {
 			rawurl[i] = packet[j];
 		}
 		url = new String(rawurl, Charset.forName("UTF-8"));		
@@ -204,5 +204,20 @@ public class SLPServiceURL
 				setHost(url);
 			}
 		}
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(serviceType);
+		sb.append(ADDRESS_PREFIX);
+		sb.append(host);
+		if (port != -1) {
+			sb.append(PORT_PREFIX);
+			sb.append(port);
+		}
+		
+		return sb.toString();
 	}
 }

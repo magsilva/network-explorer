@@ -100,6 +100,16 @@ public class BroadcastListener extends IpListener implements ObservationSubject
 						}
 						packet = new DatagramPacket(buffer, buffer.length);
 						socket.receive(packet);
+						if (packet.getLength() < buffer.length) {
+							byte[] newbuf = new byte[packet.getLength()];
+							System.arraycopy(buffer, 0, newbuf, 0, newbuf.length);
+							packet.setData(newbuf);
+							if (buffer.length > (2 * packet.getLength())) {
+								System.out.println("Buffer is to big, consider reducing it (" + buffer.length + "/" + packet.getLength() + ")");
+							}
+						} else {
+							System.out.println("Possibly truncate data");
+						}
 						packetQueue.add(packet);
 						currentReceptionErrors = 0;
 					} catch (IOException ioe) {

@@ -173,4 +173,13 @@ public final class SLPServiceType
 
 		return length;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(abstractType);
+		
+		return sb.toString();
+	}
 }

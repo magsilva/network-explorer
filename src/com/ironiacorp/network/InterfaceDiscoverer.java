@@ -22,10 +22,10 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 
 /**
@@ -99,7 +99,7 @@ public class InterfaceDiscoverer
 	public Set<InetAddress> getAddresses(NetworkInterface ni)
 	{
 		Enumeration<InetAddress> addresses = ni.getInetAddresses();
-		Set<InetAddress> validAddresses = new TreeSet<InetAddress>();
+		Set<InetAddress> validAddresses = new HashSet<InetAddress>();
 
 		while (addresses.hasMoreElements()) {
 			InetAddress address = addresses.nextElement();
@@ -128,7 +128,7 @@ public class InterfaceDiscoverer
 	 */
 	public Map<NetworkInterface, Set<InetAddress>> discover()
 	{
-		Map<NetworkInterface, Set<InetAddress>> result = new TreeMap<NetworkInterface, Set<InetAddress>>();
+		Map<NetworkInterface, Set<InetAddress>> result = new HashMap<NetworkInterface, Set<InetAddress>>();
 		Enumeration<NetworkInterface> niEnu = null;
 		
 		try {
