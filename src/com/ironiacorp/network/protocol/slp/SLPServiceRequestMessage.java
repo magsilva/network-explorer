@@ -170,7 +170,7 @@ public class SLPServiceRequestMessage extends SLPMessage
 						address.append(octet);
 						addresses.add(Inet4Address.getByName(address.toString()));
 					} catch (Exception e) {
-						throw new IllegalArgumentException(e);
+						// throw new IllegalArgumentException(e);
 					}
 					address.setLength(0);
 					octet.setLength(0);
@@ -186,7 +186,7 @@ public class SLPServiceRequestMessage extends SLPMessage
 			try {
 				addresses.add(Inet4Address.getByName(address.toString()));
 			} catch (Exception e) {
-				throw new IllegalArgumentException(e);
+				// throw new IllegalArgumentException(e);
 			}
 		}
 
