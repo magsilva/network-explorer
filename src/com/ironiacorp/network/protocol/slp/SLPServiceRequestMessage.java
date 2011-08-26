@@ -21,11 +21,15 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ironiacorp.io.StreamUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.ironiacorp.io.StreamUtil;
 
 public class SLPServiceRequestMessage extends SLPMessage
 {
+	private static Logger log = LoggerFactory.getLogger(SLPServiceRequestMessage.class);
+	
 	private static final int PREVIOUS_RESPONDER_LIST_LENGTH_SIZE = 2;
 	private int previousResponderListSize;
 	
@@ -117,6 +121,18 @@ public class SLPServiceRequestMessage extends SLPMessage
 		StringBuilder octet = new StringBuilder();
 		int octets = 0;
 
+		log.info("Parsing address of services: " + previousResponderListSize);
+		if (! previousResponderList.startsWith("127") && previousResponderList.contains("127")) {
+			previousResponderList = previousResponderList.replace("127.", ",127.");
+		}
+		
+		if (previousResponderList.startsWith("127.0.0.1")) {
+			try {
+				addresses.add(Inet4Address.getByName("127.0.0.1"));
+			} catch (Exception e) {}
+			previousResponderList = previousResponderList.replaceFirst("127.0.0.1", "");
+		}
+		
 		addresses = new ArrayList<InetAddress>();
 		for (int i = 0; i < previousResponderList.length(); i++) {
 			char c = previousResponderList.charAt(i);
@@ -132,10 +148,15 @@ public class SLPServiceRequestMessage extends SLPMessage
 			// Add new address
 			if (c == ',') {
 				address.append(octet);
-				try {
-					addresses.add(Inet4Address.getByName(address.toString()));
-				} catch (Exception e) {
-					throw new IllegalArgumentException(e);
+				octets++;
+				if (octets == 4) {
+					try {
+						addresses.add(Inet4Address.getByName(address.toString()));
+					} catch (Exception e) {
+						// throw new IllegalArgumentException(e);
+					}
+				} else {
+					// TODO: Cannot parse malformed list.
 				}
 				address.setLength(0);
 				octet.setLength(0);
@@ -168,5 +189,14 @@ public class SLPServiceRequestMessage extends SLPMessage
 				throw new IllegalArgumentException(e);
 			}
 		}
-	}	
+
+		if (log.isInfoEnabled()) {
+			StringBuilder data = new StringBuilder();
+			for (InetAddress debugAddress : addresses) {
+				data.append(debugAddress.getHostAddress());
+				data.append(" ");
+			}
+			log.info("Addresses of services: " + data.toString());
+		}
+	}
 }
