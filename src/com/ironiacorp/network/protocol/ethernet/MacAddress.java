@@ -12,10 +12,48 @@ import com.ironiacorp.datastructure.UnsignedByte;
  * @author pgautam
  *
  */
-public class MacAddress
+public class MacAddress implements Comparable
 {
-	private byte[] address;
+	public enum MacAddressType {
+		WIRED,
+		WIRELESS
+	}
 
+	private byte[] address;
+	
+	publib static MacAddress generateRandomAddress()
+	{
+		byte[] macAddress = new byte[6];
+		macAddress[0] = (Math.random() % 255) & 0xFE;
+		macAddress[1] = Math.random() % 255;
+		macAddress[2] = Math.random() % 255;
+		macAddress[3] = Math.random() % 255;
+		macAddress[4] = Math.random() % 255;
+		macAddress[5] = Math.random() % 255;
+
+		return new MacAddress(macAddress);
+	}
+
+	publib static MacAddress generateRandomAddress(String vendorName, MacAddressType type)
+	{
+		byte[] macAddress = new byte[6];
+		macAddress[0] = (Math.random() % 255) & 0xFE;
+		macAddress[1] = Math.random() % 255;
+		macAddress[2] = Math.random() % 255;
+		macAddress[3] = Math.random() % 255;
+		macAddress[4] = Math.random() % 255;
+		macAddress[5] = Math.random() % 255;
+
+		switch (type) {
+			case WIRELESS:
+				break;
+			case WIRED:
+				break;
+			default:
+		}
+		return new MacAddress(macAddress);
+	}
+	
 	public MacAddress(String macAddress)
 	{
 		if (macAddress == null) {
@@ -245,5 +283,47 @@ public class MacAddress
 	public String toString()
 	{
 		return toString(address);
+	}
+
+	public String getCardName()
+	{
+		   int i = 0;
+
+	   while (list[i].name) {
+			 if ((mac->byte[0] == list[i].byte[0]) &&
+				(mac->byte[1] == list[i].byte[1]) &&
+				(mac->byte[2] == list[i].byte[2]))
+			 {
+				    return list[i].name;
+			 }
+			 i++;
+	   }
+
+	   return NULL;
+	}
+
+	public String getCardVendor()
+	{
+		   int i, num = 0;
+
+	   /* Count */
+	   while (list[++num].name);
+
+	   /* Choose one randomly */
+	   num = random()%num;
+
+	   /* Copy the vender MAC range */
+	   for (i=0; i<3; i++) {
+			 mac->byte[i] = list[num].byte[i];
+	   }
+	}
+
+	/**
+	 * Compare MacAddress. The ordering is defined by the byte number of
+	 * the first position of the address; if each, the second one is
+	 * used and so on.
+	 */
+	public int compareTo(Object o)
+	{
 	}
 }
